@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.gms.actions.ReserveIntents;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -183,6 +184,27 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(ReserveIntents.ACTION_RESERVE_TAXI_RESERVATION);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        }
+    }
+
+    public void showMap(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse( "geo:0,0?q=Big%20Ben%2C+UK"));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void playMedia(View view) {
+        File musicFile2Play = new File("storage/external_SD/media/Silverchair/Frogstomp/02%20Tomorrow.mp3");
+        Intent i2 = new Intent();
+        i2.setAction(android.content.Intent.ACTION_VIEW);
+        i2.setDataAndType(Uri.fromFile(musicFile2Play), "audio/mp3");
+        startActivity(i2);
+        //Intent intent = new Intent(Intent.ACTION_VIEW);
+        //intent.setData(Uri.parse("file://storage/external_SD/media/Silverchair/Frogstomp/02%20Tomorrow.mp3"), "audio/mp3");
+        if (i2.resolveActivity(getPackageManager()) != null) {
+            startActivity(i2);
         }
     }
 

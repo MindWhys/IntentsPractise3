@@ -30,6 +30,12 @@
                 -->
                 <action android:name="com.google.android.gms.actions.RESERVE_TAXI_RESERVATION" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <!--
+                <action android:name="android.intent.action.VIEW" />
+                <data android:type="audio/*" />
+                <data android:type="application/ogg" />
+                <category android:name="android.intent.category.DEFAULT" />
+                -->
             </intent-filter>
         </activity>
     </application>
