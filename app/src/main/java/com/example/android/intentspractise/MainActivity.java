@@ -204,11 +204,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void createNote(View v) {
-        Intent intent = new Intent(NoteIntents.ACTION_CREATE_NOTE)
-                .putExtra(NoteIntents.EXTRA_NAME, "Note Test")
-                .putExtra(NoteIntents.EXTRA_TEXT, "This is a test of my note");
-            intent.setType("text/plain");
+    public void newNote(View view) {
+        String label = "Title";
+        String main = "This is the body of the note";
+        Intent intent = new Intent();
+        intent.setAction(NoteIntents.ACTION_CREATE_NOTE)
+                .putExtra(NoteIntents.EXTRA_NAME, label)
+                .putExtra(NoteIntents.EXTRA_TEXT, main);
             startActivity(intent);
 //            if (intent.resolveActivity(getPackageManager()) != null) {
 //            startActivity(intent);
