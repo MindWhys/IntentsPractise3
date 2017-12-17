@@ -4,25 +4,23 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.actions.NoteIntents;
 import com.google.android.gms.actions.ReserveIntents;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static android.provider.CalendarContract.EXTRA_EVENT_ALL_DAY;
 import static android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME;
 import static android.provider.CalendarContract.EXTRA_EVENT_END_TIME;
 
@@ -196,17 +194,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playMedia(View view) {
-        File musicFile2Play = new File("storage/external_SD/media/Silverchair/Frogstomp/02%20Tomorrow.mp3");
-        Intent i2 = new Intent();
-        i2.setAction(android.content.Intent.ACTION_VIEW);
-        i2.setDataAndType(Uri.fromFile(musicFile2Play), "audio/mp3");
-        startActivity(i2);
-        //Intent intent = new Intent(Intent.ACTION_VIEW);
-        //intent.setData(Uri.parse("file://storage/external_SD/media/Silverchair/Frogstomp/02%20Tomorrow.mp3"), "audio/mp3");
-        if (i2.resolveActivity(getPackageManager()) != null) {
-            startActivity(i2);
+        File musicFile2Play = new File("/storage/external_SD/media/Silverchair/Frogstomp/02 Tomorrow.mp3");
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(musicFile2Play), "audio/mp3");
+        startActivity(intent);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
+
+    public void createNote(View v) {
+        Intent intent = new Intent(NoteIntents.ACTION_CREATE_NOTE)
+                .putExtra(NoteIntents.EXTRA_NAME, "Note Test")
+                .putExtra(NoteIntents.EXTRA_TEXT, "This is a test of my note");
+            intent.setType("text/plain");
+            startActivity(intent);
+//            if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//            }
+        }
 
     /**
      * This method uses the image data sent from file storage and sends it to an ImageView
