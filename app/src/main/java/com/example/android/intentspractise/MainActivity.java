@@ -9,10 +9,12 @@ import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.actions.NoteIntents;
 import com.google.android.gms.actions.ReserveIntents;
@@ -182,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(ReserveIntents.ACTION_RESERVE_TAXI_RESERVATION);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        } else {
+            Toast.makeText(this, "No App Available", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -205,17 +209,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newNote(View view) {
-        String label = "Title";
-        String main = "This is the body of the note";
-        Intent intent = new Intent();
-        intent.setAction(NoteIntents.ACTION_CREATE_NOTE)
-                .putExtra(NoteIntents.EXTRA_NAME, label)
-                .putExtra(NoteIntents.EXTRA_TEXT, main);
+        Intent intent = new Intent(NoteIntents.ACTION_CREATE_NOTE)
+                .putExtra(NoteIntents.EXTRA_NAME, "Title")
+                .putExtra(NoteIntents.EXTRA_TEXT, "This is the main body of the note");
+            if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-//            if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivity(intent);
-//            }
+            } else {
+        Toast.makeText(this, "No App Available", Toast.LENGTH_SHORT).show();
+    }
         }
+
+    public void callPhone(View view) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:01225859072"));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void newSetting(View view) {
+        //Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+        Intent intent = new Intent(Settings.ACTION_SETTINGS);
+        //Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void sendMessage(View view) {
+        File imageFileToSend = new File("/storage/external_SD/DCIM/Camera/20140401_221900.jpg");
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mmsto:00447737172677"));
+        intent.putExtra("subject", "How about this?");
+        intent.putExtra(Intent.EXTRA_STREAM, imageFileToSend);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
     /**
      * This method uses the image data sent from file storage and sends it to an ImageView
