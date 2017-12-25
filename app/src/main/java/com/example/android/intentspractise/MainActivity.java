@@ -1,6 +1,8 @@
 package com.example.android.intentspractise;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,8 +12,11 @@ import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +32,16 @@ import static android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME;
 import static android.provider.CalendarContract.EXTRA_EVENT_END_TIME;
 
 public class MainActivity extends AppCompatActivity {
+    /**
+     * This method accesses the phones camera and gets a photo back
+     */
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_SELECT_PHONE_NUMBER = 2;
+    static final int REQUEST_IMAGE_GET = 3;
+    private static final int REQUEST_CALL = 1;
+    Intent callIntent;
+    Button mCallButton;
     private ImageView mImageView;
     private TextView contact_number;
     private ImageView photoFromStorage;
@@ -40,6 +54,22 @@ public class MainActivity extends AppCompatActivity {
         mImageView = (ImageView) findViewById(R.id.mImageView);
         contact_number = (TextView) findViewById(R.id.contact_number);
         photoFromStorage = (ImageView) findViewById(R.id.photoFromStorage);
+        init();
+    }
+
+    private void init() {
+        mCallButton = (Button) findViewById(R.id.phone);
+        mCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01234567891"));
+                if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    android.support.v4.app.ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                } else {
+                    startActivity(callIntent);
+                }
+            }
+        });
     }
 
     /**
@@ -79,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * A method that uses the "ACTION_SENDTO" intent to set up sending an email using an email app on an Android phone
      */
@@ -116,10 +145,10 @@ public class MainActivity extends AppCompatActivity {
 
         //The next two lines establish the beginTime of the event by year, month, date, hourOfDay and minute
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2018,0,19,18,0);
+        beginTime.set(2018, 0, 19, 18, 0);
         //The next two lines establish the endTime of the event by year, month, date, hourOfDay and minute
         Calendar endTime = Calendar.getInstance();
-        endTime.set(2018,0,19,20,30);
+        endTime.set(2018, 0, 19, 20, 30);
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 //If you uncomment the follwing line and the boolean line above the event is set to all day
@@ -146,20 +175,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * This method accesses the phones camera and gets a photo back
-     */
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-
     public void takePhoto(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
-
-    static final int REQUEST_SELECT_PHONE_NUMBER = 2;
 
     public void getContact(View view) {
         // Start an activity for the user to pick a phone number from contacts
@@ -169,8 +190,6 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_SELECT_PHONE_NUMBER);
         }
     }
-
-    static final int REQUEST_IMAGE_GET = 3;
 
     public void fileStorage(View view) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -191,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showMap(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse( "geo:0,0?q=Big%20Ben%2C+UK"));
+        intent.setData(Uri.parse("geo:0,0?q=Big%20Ben%2C+UK"));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -212,18 +231,21 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(NoteIntents.ACTION_CREATE_NOTE)
                 .putExtra(NoteIntents.EXTRA_NAME, "Title")
                 .putExtra(NoteIntents.EXTRA_TEXT, "This is the main body of the note");
-            if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-            } else {
-        Toast.makeText(this, "No App Available", Toast.LENGTH_SHORT).show();
-    }
-        }
-
-    public void callPhone(View view) {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:01225859072"));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        } else {
+            Toast.makeText(this, "No App Available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CALL: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(callIntent);
+                }
+            }
         }
     }
 
@@ -237,11 +259,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        File imageFileToSend = new File("/storage/external_SD/DCIM/Camera/20140401_221900.jpg");
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mmsto:00447737172677"));
-        intent.putExtra("subject", "How about this?");
-        intent.putExtra(Intent.EXTRA_STREAM, imageFileToSend);
+        intent.setData(Uri.parse("smsto:012345678910"));
+        intent.putExtra("sms_body", "Hello World");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void webBrowser(View view) {
+        Uri webpage = Uri.parse("https://eu.udacity.com/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -249,18 +277,19 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * This method uses the image data sent from file storage and sends it to an ImageView
+     *
      * @param requestCode checks that REQUEST_IMAGE_GET has been returned
-     * @param resultCode checks that the User did select some information
-     *                  (here a photo image file) to be returned
-     * @param data is the photo image file itself
+     * @param resultCode  checks that the User did select some information
+     *                    (here a photo image file) to be returned
+     * @param data        is the photo image file itself
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-           // This line checks that the user did select a file to send to the app
+        // This line checks that the user did select a file to send to the app
         if (requestCode == REQUEST_IMAGE_GET && resultCode == RESULT_OK) {
             // This line gets the photo image file and stores it in a variable
             Uri fullPhotoUri = data.getData();
-            // This line take the file and puts it into an ImageView with an id photoFromStorage
+            // This line takes the file and puts it into an ImageView with an id photoFromStorage
             photoFromStorage.setImageURI(fullPhotoUri);
         }
 
@@ -292,15 +321,12 @@ public class MainActivity extends AppCompatActivity {
          * @param data is the photo thumbnail (as a Bitmap) itself
          */
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                    //This line gets the photo data
-                    Bundle extras = data.getExtras();
-                    //This line stores the photo data as a Bitmap variable
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    // This line sends the photo data to an ImageView so it can be seen
-                    mImageView.setImageBitmap(imageBitmap);
+            //This line gets the photo data
+            Bundle extras = data.getExtras();
+            //This line stores the photo data as a Bitmap variable
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // This line sends the photo data to an ImageView so it can be seen
+            mImageView.setImageBitmap(imageBitmap);
         }
     }
-
-
-
 }

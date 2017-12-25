@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Intents Practise</string>
+    <string name="alarm">Alarm</string>
+    <string name="camera">Camera</string>
+    <string name="email">Email</string>
+    <string name="taxi">Get Taxi</string>
+    <string name="media">Play Media</string>
+    <string name="phone">Phone</string>
+    <string name="text">Text Message</string>
+    <string name="calendar">Calendar</string>
+    <string name="contacts">Contacts</string>
+    <string name="file">File Storage</string>
+    <string name="imageDescription">This is an image called using an intent</string>
+    <string name="map">Map</string>
+    <string name="note">Note</string>
+    <string name="settings">Settings</string>
+    <string name="browser">Browser</string>
 </resources>

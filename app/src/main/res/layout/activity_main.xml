@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,185 +18,184 @@
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
             android:onClick="createAlarm"
-            android:text="@string/alarm"/>
+            android:text="@string/alarm"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/photo"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
             android:onClick="takePhoto"
-            android:text="@string/camera"/>
+            android:text="@string/camera"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/email"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
             android:onClick="sendEmail"
-            android:text="@string/email"/>
+            android:text="@string/email"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/taxi"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
             android:onClick="getTaxi"
-            android:text="@string/taxi"/>
+            android:text="@string/taxi"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/note"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
             android:onClick="newNote"
-            android:text="@string/note"/>
+            android:text="@string/note"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/phone"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
-            android:text="@string/phone"/>
+            android:background="@drawable/mybutton"
+            android:text="@string/phone"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/messaging"
-            android:background="@drawable/mybutton"
-            android:textColor="@color/textColor"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
             android:onClick="sendMessage"
-            android:text="@string/text"/>
-
+            android:text="@string/text"
+            android:textColor="@color/textColor" />
 
 
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryLight"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="vertical">
 
-            <Button
-                android:id="@+id/create_event"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="createCalendar"
-                android:text="@string/calendar"/>
+        <Button
+            android:id="@+id/create_event"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="createCalendar"
+            android:text="@string/calendar"
+            android:textColor="@color/textColor" />
 
-            <Button
-                android:id="@+id/get_contact"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="getContact"
-                android:text="@string/contacts"/>
+        <Button
+            android:id="@+id/get_contact"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="getContact"
+            android:text="@string/contacts"
+            android:textColor="@color/textColor" />
 
-            <Button
-                android:id="@+id/fileStorage"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="fileStorage"
-                android:text="@string/file"/>
+        <Button
+            android:id="@+id/fileStorage"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="fileStorage"
+            android:text="@string/file"
+            android:textColor="@color/textColor" />
 
-            <Button
-                android:id="@+id/showMaps"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="showMap"
-                android:text="@string/map"/>
+        <Button
+            android:id="@+id/showMaps"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="showMap"
+            android:text="@string/map"
+            android:textColor="@color/textColor" />
 
-            <Button
-                android:id="@+id/media"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="playMedia"
-                android:text="@string/media"/>
+        <Button
+            android:id="@+id/media"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="playMedia"
+            android:text="@string/media"
+            android:textColor="@color/textColor" />
 
-            <Button
-                android:id="@+id/settings"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="newSetting"
-                android:text="@string/settings"/>
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="newSetting"
+            android:text="@string/settings"
+            android:textColor="@color/textColor" />
 
-            <Button
-                android:id="@+id/webBrowser"
-                android:background="@drawable/mybutton"
-                android:textColor="@color/textColor"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin"
-                android:onClick="webBrowser"
-                android:text="@string/browser"/>
+        <Button
+            android:id="@+id/webBrowser"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin"
+            android:background="@drawable/mybutton"
+            android:onClick="webBrowser"
+            android:text="@string/browser"
+            android:textColor="@color/textColor" />
 
-            <TextView
+        <TextView
 
-                android:id="@+id/contact_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
+            android:id="@+id/contact_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
 
-            <ImageView
-                android:contentDescription="@string/imageDescription"
-                android:id="@+id/photoFromStorage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/photoFromStorage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/imageDescription" />
 
-            <ImageView
-                android:contentDescription="@string/imageDescription"
-                android:id="@+id/mImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/mImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/imageDescription" />
 
     </LinearLayout>
+
+</LinearLayout>

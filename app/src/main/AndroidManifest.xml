@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.intentspractise">
-    <!--The line below has been changed to give this app permission to set the alarm
+    <!--The lines below has been changed to give this app permission to set the alarm,
+    read contacts, reserve a taxi and create a new note
     N.B. The permission line HAS to be put here, inside the manifest section but outside the other
     sections -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="com.android.alarm.permission.READ_CONTACTS" />
     <uses-permission android:name="com.android.alarm.permission.RESERVE_TAXI_RESERVATION" />
+    <uses-permission android:name="com.android.permission.ACTION_CREATE_NOTE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <!--2 lines below are for Calendar intent
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
@@ -30,12 +33,9 @@
                 -->
                 <action android:name="com.google.android.gms.actions.RESERVE_TAXI_RESERVATION" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <!--
-                <action android:name="android.intent.action.VIEW" />
-                <data android:type="audio/*" />
-                <data android:type="application/ogg" />
+                <action android:name="com.google.android.gms.actions.CREATE_NOTE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                -->
+                <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
     </application>
