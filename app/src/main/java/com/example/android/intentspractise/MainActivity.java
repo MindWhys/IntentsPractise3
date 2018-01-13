@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method accesses the phones camera and gets a photo back
      */
+    public class GenericFileProvider extends FileProvider {
 
+    }
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_SELECT_PHONE_NUMBER = 2;
     static final int REQUEST_IMAGE_GET = 3;
@@ -220,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         File musicFile2Play = new File("/storage/external_SD/media/Silverchair/Frogstomp/02 Tomorrow.mp3");
         Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(musicFile2Play), "audio/mp3");
+        intent.setDataAndType(FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID + ".provider",(musicFile2Play)));
         startActivity(intent);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
